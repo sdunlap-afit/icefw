@@ -14,87 +14,20 @@ Your goal is to analyze the firmware samples and answer a series of questions. T
 As always, if you get stuck or want to verify your answer, ask for help.
 
 
-## Turn-in:
-
-Your turn-in for this lab will be a Teams quiz with the following:
-
-
-1. 1756-L61 - Is the majority of the firmware encrypted, compressed, or neither? How do you know?
-
-1. 1756-L61 - Is there a file system in the firmware? How do you know?
-
-1. 1756-L61 - What processor architecture is the firmware for? How do you know?
-
-1. 1756-L61 - What high-level language (i.e., NOT assembly) was used to write all/most of the firmware source code? How do you know?
-
-1. 1756-L61 -  Where are the checksum and crc stored in the firmware? How do you know?
-
-
-Note: The following SEL questions are intended to guide you through the process of decrypting the firmware. You will need to finish writing `upg_decrypt.py`, and answering these questions will help you find the information you need.
-
-6. SEL-3505-5 - Based on `upgd_extract_upg_package`, what encryption algorithm is used to encrypt/decrypt the firmware? How do you know?
-
-1. SEL-3505-5 - Based on the JTAG dump, what **key** is most likely used to **validate the source** of the firmware? How do you know?
-
-1. SEL-3505-5 - Do engineers tend to group related things together?
-    * Yes
-    * No
-
-1. SEL-3505-5 - Use Python to decrypt the firmware. What is the underlying file type of `rtac.upg` **after** decrypting it? How do you know?
-
-1. SEL-3505-5 - List the three directories at the root of the decrypted and extracted image.
-
-
-
-1. Survey - Roughly how long did you take to complete this lab?
-1. Survey - What issues did you encounter during this lab?
-1. Survey - What recommendations do you have for improving this lab for next year?
-
-
 
 # Setup
 
 First, you will need to download the firmware samples from the **Teams files** section. Unzip them and open a WSL terminal in the directory where you unzipped the files. You only need tools in WSL for this lab, but you're welcome to use any tools you like.
 
 
-# Rockwell Automation 1756-L61
+## Tools
 
-The 1756-L61 is a CPU module for the ControlLogix series of PLCs. It is used in a wide variety of industrial control systems. The firmware is stored in a flash chip and is updated over the network. I have provided three different versions of the firmware for the 1756-L61. These were simply downloaded from Rockwell's website. You will need to analyze them and answer the questions above.
-
-* PN-49503.bin - version 16.56
-* PN-49505.bin - version 16.80
-* PN-69415.bin - version 18.11
-
-<div align="center">
-<img src="./img/01.png" width="200">
-</div><br/>
-
-# Schweitzer Engineering Laboratories (SEL) SEL-3505-5
-
-The SEL-3505-5 is a real-time automation controller (RTAC) used in a wide variety of industrial control systems. These RTACs are ubiquitous in the power industry. The firmware is not available for download, but I emailed customer support from my AFIT email and asked politely for some firmware versions. They were happy to oblige and sent me three different versions, although you only need one for this lab. 
-
-This RTAC is a text-book example of security for embedded system firmware. They did pretty much everything correctly (at least with their firmware). In order to break their security, I am providing additional data obtained via JTAG.
-
-* rtac.upg - Raw firmware update file as received from SEL
-* 0xfff00000_0xffffffff.bin - This is a raw memory dump from the device, obtained via JTAG
-* upgd_extract_upg_package - This executable was extracted from a device using JTAG
-* upg_decrypt.py - Starting point for you to write a Python script to decrypt the firmware
-
-<div align="center">
-<img src="./img/02.png" width="200">
-</div><br/>
-
-# Tools
-
-## Install
-
-Install tools as needed. You can use the following commands to install the tools you need in WSL. Many of the tools you need are already installed in most Linux distributions.
+Install tools as needed. You can use the following commands to install the tools you need in WSL. Many of the tools are already installed in most Linux distributions.
 
 ```bash
 sudo apt update             # If you just installed WSL, you have to run this first
 sudo apt install binwalk    # Binary analysis tool
 sudo apt install vbindiff   # Visual binary diff tool
-sudo apt install bless      # Visual hex editor (although I prefer hd)
 ```
 
 You will also need to write a Python script to decrypt the SEL firmware. There are some issues with pip and pycrypto, but the following library worked on my system
@@ -206,14 +139,6 @@ Not needed for this lab, but a very cool tool for visualizing the contents of a 
 https://binvis.io/
 
 
-
-# Encryption Refresher
-
-There are two main types of encryption: symmetric and asymmetric. 
-
-Symmetric encryption uses the same key for both encryption and decryption. This form of encryption is much faster than asymmetric encryption and is used for encrypting/decrypting bulk data.
-
-Asymmetric encryption uses a public key for one direction and a private key for the other. The public key can be shared with anyone; the private key must be kept secret. This form of encryption is used to validate the source and integrity of the data (i.e., digital signatures). It can also be used for authentication.
 
 
 
