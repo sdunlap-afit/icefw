@@ -26,14 +26,13 @@ Install tools as needed. You can use the following commands to install the tools
 
 ```bash
 sudo apt update             # If you just installed WSL, you have to run this first
-sudo apt install binwalk    # Binary analysis tool
 sudo apt install vbindiff   # Visual binary diff tool
+sudo apt install ghidra     # Reverse engineering tool
 ```
 
 You will also need to write a Python script to decrypt the SEL firmware. There are some issues with pip and pycrypto, but the following library worked on my system
 
 ```bash
-sudo apt install python3 python3-pip
 pip install pycryptodome
 ```
 
