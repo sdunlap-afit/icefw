@@ -17,7 +17,13 @@ As always, if you get stuck or want to verify your answer, ask for help.
 
 # Setup
 
-First, you will need to download the firmware samples from the **Teams files** section. Unzip them and open a WSL terminal in the directory where you unzipped the files. You only need tools in WSL for this lab, but you're welcome to use any tools you like.
+First, you will need to clone this repo in your Linux VM and extract the firmware files.
+
+```bash
+git clone https://github.com/sdunlap-afit/icefw.git
+cd icefw
+tar -xzf firmware_lab_files.tar.gz
+```
 
 
 ## Tools
