@@ -28,7 +28,7 @@ tar -xzf firmware_lab_files.tar.gz
 
 ## Tools
 
-Install tools as needed. You can use the following commands to install the tools you need in WSL. Many of the tools are already installed in most Linux distributions.
+Use the following commands to install the tools we need in Linux. Many of the tools we'll use are already installed in most Linux distributions.
 
 ```bash
 sudo apt update             # If you just installed WSL, you have to run this first
@@ -67,11 +67,11 @@ Things to look for:
 
 ## grep
 
-`grep` is a powerful tool for regex searching. You can use it to search for specific strings or patterns in binary and text files. Once of my favorite ways to use it is to pipe the output of the `strings` command to `grep`. My other favorite way is to recursively search all files in a directory.
+`grep` is a powerful tool for regex searching. You can use it to search for specific strings or patterns in binary and text files. One of my favorite ways to use it is to pipe the output of the `strings` command to `grep`. My other favorite way is to recursively search all files in a directory.
 
 ```bash
 strings filename.bin | grep -i "password"  # -i makes the search case-insensitive
-grep -Ri "password" .  # Recursively search all files in the current directory
+grep -Ri "password" ./  # Recursively search all files in the current directory
 ```
 
 ## Hexdump
