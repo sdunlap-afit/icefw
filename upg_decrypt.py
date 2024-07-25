@@ -14,7 +14,7 @@ ciphertext = open('firmware_lab_files/sel3505/rtac.upg', 'rb').read()
 
 
 # TODO: Implement the decryption here
-decrypted = 'You forgot to code stuff'
+msg = 'You forgot to code stuff'
 
 
 
@@ -22,4 +22,4 @@ decrypted = 'You forgot to code stuff'
 
 
 
-open('firmware_lab_files/sel3505/decrypted.bin', 'wb').write(decrypted)
+open('firmware_lab_files/sel3505/decrypted.bin', 'wb').write(msg)
