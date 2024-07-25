@@ -10,7 +10,7 @@
 
 
 # Read in the raw file ('rb' for reading binary file)
-ciphertext = open('rtac.upg', 'rb').read()
+ciphertext = open('firmware_lab_files/sel3505/rtac.upg', 'rb').read()
 
 
 # TODO: Implement the decryption here
@@ -22,4 +22,4 @@ decrypted = 'You forgot to code stuff'
 
 
 
-open('decrypted.bin', 'wb').write(decrypted)
+open('firmware_lab_files/sel3505/decrypted.bin', 'wb').write(decrypted)
