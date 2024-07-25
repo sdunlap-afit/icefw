@@ -27,22 +27,53 @@ Asymmetric encryption uses a public key for one direction and a private key for 
 
 Use the tools from exercise 1 to analyze the firmware. Is the firmware encrypted and/or compressed?
 
+```bash
+strings rtac.upg | less
+binwalk rtac.upg
+binwalk -E rtac.upg
+```
+
+Well, there's not much we can do with this file. It's encrypted and compressed. We need to extract it before we can analyze it. To figure out how to extract it, we need to take another approach to figure out how it's packed. There are a couple different approaches we could take, but JTAG is the most direct.
 
 
 # Firmware Update Utility
 
-Using JTAG, we managed to extract memory from a physical device. In the memory dumps, we found an ELF executable responsible for conducting firmware updates. We also found some interesting sections of memory that may prove useful. The ELF and memory dump are provided in `firmware_lab_files/`. We now need to reverse-engineer this ELF file to determine how the firmware is encrypted. For this, we'll use Ghidra, a free reverse engineering tool developed by the NSA.
+Using JTAG, we managed to extract memory from the physical device. In the memory dumps, we found an ELF file named `upgd_extract_upg_package`. Based on the name, this executable is most likely responsible for extracting the update file during a firmware update. We also found some interesting sections of memory that may prove useful. The ELF and memory dump are provided in `firmware_lab_files/`. We now need to reverse-engineer this ELF file to determine how the firmware is encrypted. 
+
+
+## Identifying the encryption algorithm
+
+Use `strings` to look for any hints about the encryption algorithm used in the firmware update utility. 
+
+```bash
+strings upgd_extract_upg_package | less
+```
+
+Googling `"EVP" Crypto` tells us that `EVP` is a common prefix for functions in the OpenSSL library. Looking up the individual functions will tell us much of what we need to know about the encryption algorithm. Specifically, `EVP_bf_cbc` tells us that Blowfish in CBC mode is being used. 
+
+```bash
+strings upgd_extract_upg_package | grep EVP
+```
 
 
 ## Disassembling the executable
 
+While we know the algorithm and mode, there may be other details we need to know to decrypt the firmware. We can use Ghidra to disassemble the executable and look for clues.
+
 1. Open Ghidra and create a new project.
+
 1. Import `upgd_extract_upg_package` file into the project and under `Language`, select `PowerPC` variant `default`.
+
 1. Double-click on `upgd_extract_upg_package` to open it in CodeBrowser.
+
 1. Select `Yes` and then `Analyze` to analyze the file.
+
 1. Select `Window/Functions` to open the functions panel and then sort by name.
+
 1. Look for functions starting with `EVP_`. These are likely encryption functions.
+
 1. Select `EVP_bf_cbc` (there are two) and look for an XREF starting with `FUN_`. Double-click the XREF to jump to the call.
+
 1. Open the decompile window and analyze the function.
 
     <div align="center">
@@ -50,8 +81,11 @@ Using JTAG, we managed to extract memory from a physical device. In the memory d
     </div><br/>
 
 1. Open the function immediately following `EVP_bf_cbc` and use the function calls to guess what it's doing. 
-1. Go back to the call immediately following `EVP_bf_cbc` and analyze the function parameters in the decompile window. Specifically, note the integer that is added to the cipher text pointer and subtracted from the length parameter. This gives us a critical clue about the firmware format.
+
+1. Go back to the call immediately following `EVP_bf_cbc` and analyze the function parameters in the decompile window. Specifically, note the integer that is added to the **cipher text pointer** and subtracted from the **length** parameter. This gives us a critical clue about the firmware format.
+
 1. There is a function call with similar parameters a few lines before the call to `EVP_bf_cbc`. Open this function and analyze it.
+
 
 
 # Finding the encryption keys
@@ -75,7 +109,7 @@ strings 0xfff00000_0xffffffff.bin | less
 
 **Important note:** Engineers are predictable and tend to store associated data together. If you find one key, you may find others nearby. 
 
-Look at the strings near the public key and see if any look like they could be symmetric keys. Additionally, try to find the IV, which is most likely stored near the symmetric key.
+Look at the strings near the public key and see if any look like they could be symmetric keys. Additionally, try to find the IV, which is most likely stored near the symmetric key. While Blowfish does support variable length keys, the length of the IV should match the block size of the encryption algorithm. For Blowfish, the block size is 64 bits (8 bytes).
 
 
 # Python script
@@ -86,7 +120,7 @@ The first answer at the following link gives a good example of how to decrypt Bl
 
 https://stackoverflow.com/questions/35042164/how-to-decrypt-using-blowfish-in-pycrypto
 
-Copy the required sections of the answer and update the values as needed. Don't forget the offset value we identified in the disassembly step. Once you have the script working, decrypt the firmware and analyze the new file.
+Copy the required sections from the link above and update the values as needed. Don't forget the offset value we identified in the disassembly step. Once you have the script working, decrypt the firmware and analyze the new file.
 
 
 # Decrypted file analysis
@@ -99,16 +133,17 @@ binwalk -E decrypted.bin
 binwalk decrypted.bin
 ```
 
+If all goes well, `binwalk` should be able to identify a compression algorithm.
+
+
 # Extract the firmware
 
-`binwalk` tells us that the file is a standard `tar.gz` archive. We **could** use `binwalk` to extract it, but it's easier to use `tar` directly. `tar` will extract the files into the current directory, which may be confusing. We can move the file into a temp directory before extracting it to keep everything clean.
+`binwalk` tells us that the file is a standard `tar.gz` archive. We **could** use `binwalk` to extract it, but it's easier to use `tar` directly. Use `tar` to extract the files into a temporary directory.
 
 ```bash
 mkdir tmp
-cp decrypted.bin tmp/decrpyted.tar.gz
-cd tmp
-tar -xzf decrypted.tar.gz
-ls
+tar -xzf decrypted.bin -C tmp/
+ls tmp
 ```
 
 If all goes well, this will result in three new directories, `nor/`, `sbin/`, and `scripts/`. 
