@@ -9,12 +9,11 @@ In this lab, you will be performing static analysis on firmware samples from thr
 
 1. Rockwell 1756-L61 programmable logic controller (PLC)
 2. SEL-3505-5 real-time automation controller (RTAC). 
-3. CubeWheel reac
-Both are professional-grade devices used in industrial control systems (ICS). These devices were chosen to provide examples of the two primary types of firmware you will encounter in the field: bare-metal firmware and embedded Linux firmware. The Rockwell PLC is a bare-metal device, meaning it runs directly on the hardware without an operating system. The SEL RTAC is an embedded Linux device, meaning it runs a stripped-down version of Linux with a custom user interface and applications.
+3. CubeWheel reaction wheel for satellite attitude control.
 
+All three are professional-grade devices used in real-world control systems. These devices were chosen to provide examples of the two primary types of firmware you will encounter in the field: bare-metal firmware and embedded Linux firmware. The Rockwell PLC and CubeWheel reaction wheel are bare-metal devices, meaning they run directly on the hardware without a standard operating system. The SEL RTAC is an embedded Linux device, meaning it runs a stripped-down version of Linux with a custom user interface and applications. The SEL RTAC is a textbook example of security for embedded system firmware. They did pretty much everything correctly (at least with their firmware). 
 
-Your goal is to analyze the firmware samples and answer a series of questions. There are multiple ways to discover the required information. 
-
+Your goal is to analyze the firmware samples and answer a series of questions.
 
 
 # Setup
@@ -29,22 +28,21 @@ cd icefw
 tar -xzf firmware_lab_files.tar.gz
 ```
 
+## Environment
+
+There are plenty of Linux environments you can use for this lab, but we will do everything using your existing `Kali Linux VM`. If you want to do something different, that's fine, but I may not be able to help you if you run into problems.
+
 
 ## Tools
 
-Use the following commands to install the tools we need in Linux. Many of the tools we'll use are already installed in most Linux distributions.
+Use the following commands to install the tools we need in your `Kali VM`. Many of the tools we'll use are already installed in most Linux distributions, but this should cover everything you need in `Kali`. 
 
 ```bash
-sudo apt update             # If you just installed WSL, you have to run this first
-sudo apt install vbindiff   # Visual binary diff tool
-sudo apt install ghidra     # Reverse engineering tool
-sudo apt install code-oss   # Visual Studio Code
-```
-
-You will also need to write a Python script to decrypt the SEL firmware. There are some issues with pip and pycrypto, but the following library worked on my system
-
-```bash
-pip install pycryptodome
+# Visual binary diff tool
+# Reverse engineering tool
+# Visual Studio Code
+# library to write a Python script to decrypt the SEL firmware. 
+sudo apt update && sudo apt install -y vbindiff ghidra code-oss python3-pycryptodome
 ```
 
 
@@ -68,6 +66,7 @@ Things to look for:
 * URLs
 * Email addresses
 * Anything else that looks interesting
+
 
 ## grep
 

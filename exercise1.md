@@ -2,7 +2,7 @@
 
 # Rockwell Automation 1756-L61
 
-The 1756-L61 is a CPU module for the ControlLogix series of PLCs. It is used in a wide variety of industrial control systems. The firmware is stored in a flash chip and is updated over the network. I have provided three different versions of the firmware for the 1756-L61. These were simply downloaded from Rockwell's website. You will need to analyze them and answer the questions above.
+The 1756-L61 is a CPU module for the ControlLogix series of PLCs. It is used in a wide variety of industrial control systems. The firmware is stored in a flash chip and is updated over the network. I have provided three different versions of the firmware for the 1756-L61. These were simply downloaded from Rockwell's website. You will need to analyze them and answer some questions.
 
 * PN-49503.bin - version 16.56
 * PN-49505.bin - version 16.80
@@ -30,6 +30,8 @@ Open a terminal and navigate to the directory with the firmware files.
 ```bash
 cd firmware_lab_files
 ```
+
+You can also open this directory in Visual Studio Code. We'll use a raw terminal for some commands and the VSCode terminal for others.
 
 
 ## Is the majority of the firmware encrypted, compressed, or neither?
@@ -70,7 +72,7 @@ You can use the `strings` command to look for compiler information in the firmwa
 strings PN-49503.bin | less
 ```
 
-Even easier, you can also use `binwalk` to look for common processor architectures.
+Even easier, you can also use `binwalk` to look for common processor architectures. This won't work for all architectures, but it will work for the most common ones.
 
 ```bash
 binwalk -A PN-49503.bin
@@ -80,7 +82,7 @@ binwalk -A PN-49503.bin
 
 ## What high-level language (i.e., NOT assembly) was used to write all/most of the firmware source code?
 
-Strings can provide numerous clues about the developers. Even without a filesystem, there may still be debug strings and other artifacts left over from the developer machines. Sometimes, you can even find developer names and email addresses in the strings.
+Strings can provide numerous clues from the developers. Even without a filesystem, there may still be debug strings and other artifacts left over from the developer machines. Sometimes, you can even find developer names and email addresses in the strings. It is also common to find compiler information and copyright notices, which can help you identify the high-level languages and libraries used to write the firmware.
 
 ```bash
 strings PN-49503.bin | less
@@ -89,7 +91,7 @@ strings PN-49503.bin | less
 
 ## Is there a file system in the firmware?
 
-You can use `binwalk` to look for common file system signatures. Be warry of false positives. Also, you **can** have individual files in a binary without a file system.
+You can use `binwalk` to look for common file system signatures. Be wary of false positives. Also, you **can** have individual files in a binary without a file system.
 
 ```bash
 binwalk PN-49503.bin
