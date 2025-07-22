@@ -3,21 +3,25 @@
 </div><br clear="all" /><br>
 
 
-# Firmware Analysis Lab
+# Firmware Analysis
 
-Read through the entire lab before getting started, so you know what's coming.
+In this lab, you will be performing static analysis on firmware samples from three different commercial devices. 
 
-In this lab, you will be performing static analysis on firmware samples from two different commercial devices. The first is a Rockwell 1756-L61 programmable logic controller (PLC), and the second is a SEL-3505-5 real-time automation controller (RTAC). Both are professional-grade devices used in industrial control systems (ICS).
+1. Rockwell 1756-L61 programmable logic controller (PLC)
+2. SEL-3505-5 real-time automation controller (RTAC). 
+3. CubeWheel reac
+Both are professional-grade devices used in industrial control systems (ICS). These devices were chosen to provide examples of the two primary types of firmware you will encounter in the field: bare-metal firmware and embedded Linux firmware. The Rockwell PLC is a bare-metal device, meaning it runs directly on the hardware without an operating system. The SEL RTAC is an embedded Linux device, meaning it runs a stripped-down version of Linux with a custom user interface and applications.
 
-Your goal is to analyze the firmware samples and answer a series of questions. There are multiple ways to derive the required information. You will need to explain how you discovered the information. 
 
-As always, if you get stuck or want to verify your answer, ask for help.
+Your goal is to analyze the firmware samples and answer a series of questions. There are multiple ways to discover the required information. 
 
 
 
 # Setup
 
-First, you will need to clone this repo in your Linux VM and extract the firmware files.
+First, you will need to download `firmware_lab_files.tar.gz` from this repository. You can use `7-zip` on Windows or `tar` on Linux to extract the files. The archive contains the firmware samples and a few other files you will need for the lab.
+
+For Linux:
 
 ```bash
 git clone https://github.com/sdunlap-afit/icefw.git
