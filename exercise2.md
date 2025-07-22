@@ -5,6 +5,9 @@
 
 
 ## Ghidra Set-Up
+<details closed>
+<summary>Answer</summary>
+<br>
 Requirments: Install Ghidra if it isn't already on your machine, then install prefered Hex editor. I will be using ImHEX.
 1. Ghidra Windows: [https://github.com/NationalSecurityAgency/ghidra/releases]. Linux: [snap install ghidra]
 2. ImHEX [https://imhex.werwolv.net/]
@@ -62,7 +65,7 @@ Requirments: Install Ghidra if it isn't already on your machine, then install pr
 18. Select the Alaysis tab at the top and select Analyze All Open, click Accept/YES on the following prompts to analyze your code with this new memory addition.
     <img width="1222" height="360" alt="image" src="https://github.com/user-attachments/assets/aa975df7-e737-4464-8d7a-948129c7da94" />
 19. <b>Congratualtions now you can begin Reverse Engineering the Firmware!!</b>
-    
+</details>
 
 
    
