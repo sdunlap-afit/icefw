@@ -18,14 +18,14 @@ This RTAC is a textbook example of security for embedded system firmware. They d
 
 There are two main types of encryption: symmetric and asymmetric. 
 
-Symmetric encryption uses the same key for both encryption and decryption. This form of encryption is much faster than asymmetric encryption and is used for encrypting/decrypting bulk data. These algorithms are often block ciphers, meaning they encrypt data in fixed-size blocks. If the last block is not the correct size, it is padded with the length of the padding. In addition to the symmetric key, many algorithms also require an initialization vector (IV). This is a random value that is used to start the encryption process. 
+Symmetric encryption uses the same key for both encryption and decryption. This form of encryption is much faster than asymmetric encryption and is used for encrypting/decrypting bulk data. These algorithms are often block ciphers, meaning they encrypt data in fixed-size blocks. The last block of the cyphertext will is usually padded with the length of the padding. In addition to the symmetric key, many algorithms also require an initialization vector (IV). This is a random value that is used to start the encryption process. The IV is sometimes included with the encrypted data, but it can also be stored separately or even hard-coded into the decryption code.
 
 Asymmetric encryption uses a public key for one direction and a private key for the other. The public key can be shared with anyone; the private key must be kept secret. This form of encryption is used to validate the source and integrity of the data (i.e., digital signatures). It can also be used for authentication. Public/private keys are often stored in plain text or in a well-known format. Binwalk knows how to search for common formats like PEM and DER.
 
 
 # Initial analysis
 
-Use the tools from exercise 1 to analyze the firmware. Is the firmware encrypted and/or compressed?
+Use the same tools from exercise 1 to analyze the firmware. Is the firmware encrypted and/or compressed?
 
 ```bash
 strings rtac.upg | less
@@ -33,7 +33,7 @@ binwalk rtac.upg
 binwalk -E rtac.upg
 ```
 
-Well, there's not much we can do with this file. It's encrypted and compressed. We need to extract it before we can analyze it. To figure out how to extract it, we need to take another approach to figure out how it's packed. There are a couple different approaches we could take, but JTAG is the most direct.
+Well, there's not much we can do with this file. It's encrypted and compressed. We need to extract it before we can analyze it. To figure out how to extract it, we need to take another approach to figure out how it's packed. There are a couple different approaches we could take, but JTAG is the most direct. 
 
 
 # Firmware Update Utility
@@ -77,7 +77,7 @@ While we know the algorithm and mode, there may be other details we need to know
 1. Open the decompile window and analyze the function.
 
     <div align="center">
-    <img src="./img/ex2_01.png">
+    <img src="./img/ex3_01.png">
     </div><br/>
 
 1. Open the function immediately following `EVP_bf_cbc` and use the function calls to guess what it's doing. 
