@@ -6,7 +6,7 @@
 
 ## Ghidra Set-Up
 <details closed>
-<summary>Answer</summary>
+<summary>Set-Up</summary>
 <br>
 Requirments: Install Ghidra if it isn't already on your machine, then install prefered Hex editor. I will be using ImHEX.
 1. Ghidra Windows: [https://github.com/NationalSecurityAgency/ghidra/releases]. Linux: [snap install ghidra]
