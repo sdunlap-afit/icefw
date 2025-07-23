@@ -80,23 +80,6 @@ Requirments: Install Ghidra if it isn't already on your machine, then install pr
 
 ## Reverse Engineering
 
-
-
-10. <img width="576" height="516" alt="image" src="https://github.com/user-attachments/assets/507dbe00-9923-465c-b05e-6809c2c5b04e" />
-<img width="652" height="149" alt="image" src="https://github.com/user-attachments/assets/0f586351-6fe3-4321-912b-ebfd6da85247" />
-
-
-13. <img width="655" height="667" alt="image" src="https://github.com/user-attachments/assets/cec7b8c3-8c96-4742-a54c-3bff2db0606e" />
-
-14. <img width="975" height="495" alt="image" src="https://github.com/user-attachments/assets/476d7130-cf70-4797-97df-6f5d65fc3ebd" />
-
-
-
-
-
-
-
-## Reverse Engineering
 ### Command Format
 ```
 2 Bytes  1 Byte  Variable Bytes  2 Bytes
@@ -217,8 +200,8 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	</details>
 
 10. Now that we have identified the the location we are going to add code to, go back and add a ```bl``` instruction to the last line of our Redundant Error statement that we jump to. Right click on the line and select path instruction. Then type ```bl``` in the left box and ```0x08039828``` in the right box.
-(image)
-(image)
+<img width="576" height="516" alt="image" src="https://github.com/user-attachments/assets/507dbe00-9923-465c-b05e-6809c2c5b04e" />
+<img width="652" height="149" alt="image" src="https://github.com/user-attachments/assets/0f586351-6fe3-4321-912b-ebfd6da85247" />
 
 11. Congratulation you have successfully patched in a jump to your own instructions! Now it's time to learn how to change the way the program functions.
 12. Navigate to Case 40(The set speed command 0x08034978) and look for what register/variable is used to set the speed.
@@ -229,13 +212,13 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	</details>
 
 13. Let's edit what value our code sets the speed to be a constant rather then a variable. Right click on a free line of memory, preferably further down to leave room for our commands, and right click, hover over data, and then click on the float variable. Then right click again and select patch data(like we did in the previous instructions) and then set the float value to a constant, like 10 for example.
-(image)
+<img width="655" height="667" alt="image" src="https://github.com/user-attachments/assets/cec7b8c3-8c96-4742-a54c-3bff2db0606e" />
 
 14. Now we want to add commands that set r4 to our intended value. Our assembler doesn't like to load 4 bytes of memory into one register in a single command so we are going to utilize the move high (```movt```) and the move low(```movw```) instructions to reference our constant. Ghidra helps you format your commands, can you figure it out?
  	<details closed>
 	<summary>Answer</summary>
 	<br>
-	(image)
+	<img width="975" height="495" alt="image" src="https://github.com/user-attachments/assets/476d7130-cf70-4797-97df-6f5d65fc3ebd" />
 	</details>
 15. Now that we have set the value of the register to our constant we can jump to the actual set speed instructions.
  	<details closed>
