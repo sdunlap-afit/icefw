@@ -15,7 +15,7 @@ Requirments: Install Ghidra if it isn't already on your machine, then install pr
 
 ### Set-Up
 1. First rename the Reaction Wheel Firmware to control_program.cs and make a copy called control_program_copy.cs
-2. Once you have Ghidra installed open it in Linux via the terminal by typing ```ghidra```or in Windows by double-clicking the run script in the unzipped file.
+2. Once you have Ghidra installed open it in Linux via the terminal by typing ```ghidra```or in Windows by double-clicking the run script in the unzipped file. <br>
    <img width="680" height="462" alt="image" src="https://github.com/user-attachments/assets/d39750fc-1508-4805-b085-6aa038377e7b" />
 5. Once Ghidra is started click on the file tab in the top left and then click import file. Navigate to the location of your control_program_copy.cs and add it to Ghidra.
 
