@@ -184,8 +184,8 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	<img width="1173" height="150" alt="image" src="https://github.com/user-attachments/assets/c771ef50-a748-44ae-8c33-258a8da03b82" />
 	</details>
 
-8. First let's make our Jump Table jump to the last line of the redundant error statement whenever we send a command code of 09. Do the math! Right click on the correct index and click Patch Data and type the correct set of bytes to jump to the last line of our error statement (0x008034b04).
-<img width="776" height="617" alt="image" src="https://github.com/user-attachments/assets/5d26a0b9-5815-494c-b574-ed9e0d2c20a2" />
+8. First let's make our Jump Table jump to the last line of the redundant error statement whenever we send a command code of 09. Do the math! Right click on the correct index and click Patch Data and type the correct set of bytes to jump to the last line of our error statement (0x008034b04).  <br>
+	<img width="776" height="617" alt="image" src="https://github.com/user-attachments/assets/5d26a0b9-5815-494c-b574-ed9e0d2c20a2" />
 	<details closed>
 	<summary>Answer</summary>
 	<br>
@@ -226,8 +226,33 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	<br>
 	```bl	0x08034978```
 	</details>
+ 16. What are we forgetting? The HEADER! We won't be able to upload the file without the header containing the file info! Now navigate to the File tab in the top left of Ghidra and select export program. Make sure the format is set to Original program in order to export it as a .cs.  <br>
+	<img width="632" height="216" alt="image" src="https://github.com/user-attachments/assets/c946f86d-5ed5-4409-a7d2-433996f34ccc" />
 
-16. Congrats! You have successfully implement your proof of concept rootkit! What other functions would we be able to develop using a more flushed out rootkit? Communicate from the device to other connected devices! Set their speed, replace firmware, override instructions., and more! Brodcats to bootloader commands:
+17. Make sure to store a copy of your .cs file by compressing it into a zip folder, we'll come back to this in a bit.
+    <img width="267" height="186" alt="image" src="https://github.com/user-attachments/assets/81516235-85a1-4d16-8796-21a138006a83" />
+
+    
+19. Open up ImHEX(after following the prompts) and drag your control_program.cs and your control_program_copy.cs into the editor. On your exported control_program_copy.cs left click on the first byte and select insert. You are going to want to insert the size of the header (0x72).
+    <img width="778" height="713" alt="image" src="https://github.com/user-attachments/assets/16e6b8a7-84d8-43cb-86a3-cc923100fea6" />
+    <img width="952" height="514" alt="image" src="https://github.com/user-attachments/assets/5e65011e-c05f-4757-ad33-9f3410e4083b" />
+
+20. Now move over to your control_program.cs and copy the first 0x72 bytes and then past them into your control_program_copy.cs. Make sure to save the file when you are done copying the header.  <br>
+    <img width="560" height="542" alt="image" src="https://github.com/user-attachments/assets/bea68643-b064-40a1-b131-31fd3bd472c8" />
+    <img width="555" height="567" alt="image" src="https://github.com/user-attachments/assets/bab5d145-5d7c-4f73-abb5-f39344473d63" />
+
+21. Remember what bytes in the header are the CRC value? Navigate into the zip folder and right click on the file. Click on the properties menu and you should see the CRC value displayed on the bottom half.  <br>
+    <img width="357" height="446" alt="image" src="https://github.com/user-attachments/assets/b4e31fb2-5c8d-4f5f-8e34-cc602ae73cbb" />
+    
+22. Replace the CRC bytes in the header with what is displayed on your properties menu. Remember that the program operates in little endian! Save the file when you are done. Don't worry your CRC value may different then mine depending on where we wrote the instructions and saved the float value.  <br>
+ 	<details closed>
+	<summary>Answer</summary>
+	<br>
+	<img width="591" height="302" alt="image" src="https://github.com/user-attachments/assets/fcf751ec-f014-4267-a0a6-53a1c572942f" />
+	</details>
+    
+
+23. Congrats! You have successfully implement your proof of concept rootkit! What other functions would we be able to develop using a more flushed out rootkit? Communicate from the device to other connected devices! Set their speed, replace firmware, override instructions., and more! Brodcats to bootloader commands:
 ```
 		undefined Send_UART_Cmd()  
 	    r0:4           input  
