@@ -269,7 +269,7 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	check_continue  
 	    cmp        length, #0x0  
 	    bne        loop  
-	    nop  <br>
+	    nop 
 	    cpsid      i 
 	    dsb        #0xf  
 	    isb        #0xf  
