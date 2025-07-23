@@ -29,7 +29,7 @@ Requirments: Install Ghidra if it isn't already on your machine, then install pr
    <br>
    <img width="546" height="377" alt="image" src="https://github.com/user-attachments/assets/be796647-9323-402a-a15e-a92e04c00d3c" />
    </details>
-9. Select the options button in the bottom right of the windo after you have selected the correct language.
+9. Select the options button in the bottom right of the window after you have selected the correct language.
    <img width="533" height="297" alt="image" src="https://github.com/user-attachments/assets/c03c44dc-7536-4ecb-a4eb-c525fa3d362d" />
 10. What are we inspecting? What's the base address? Ho much space does the header take up? How long is the resulting program(Ghidra will give you this)?
    <details closed>
