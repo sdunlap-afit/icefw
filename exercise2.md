@@ -69,7 +69,7 @@ Requirments: Install Ghidra if it isn't already on your machine, then install pr
 7. Fill in the details and click add for each section you would like to add to the Memory Map. If you had a file you wanted to add you would select File Bytes at the bottom and navigate to the file you would like to include in that space in memory(Useful to add bootloader or other sections of code). <br>
     <img width="488" height="381" alt="image" src="https://github.com/user-attachments/assets/6f6524f1-00c7-49ea-9f40-db7c050957c5" />
    
-8. Select the Alaysis tab at the top and select Analyze All Open, click Accept/YES on the following prompts to analyze your code with this new memory addition.
+8. Select the Alaysis tab at the top and select Analyze All Open, click Accept/YES on the following prompts to analyze your code with this new memory addition. (You can also select the C icon at the top of Ghidra to see the code decompiled in C)
     <img width="1222" height="360" alt="image" src="https://github.com/user-attachments/assets/aa975df7-e737-4464-8d7a-948129c7da94" />
 9. <b>Congratualtions now you can begin Reverse Engineering the Firmware!!</b>
 </details>
@@ -79,4 +79,37 @@ Requirments: Install Ghidra if it isn't already on your machine, then install pr
 
 
 ## Reverse Engineering
+
+1. 
+<img width="1340" height="722" alt="image" src="https://github.com/user-attachments/assets/6e873574-d533-441b-ba0b-2e2f26ff52ab" />
+
+
+
+5. <img width="1228" height="715" alt="image" src="https://github.com/user-attachments/assets/67dd4b50-a8ee-4064-a181-86b5cfb92471" />
+<img width="418" height="303" alt="image" src="https://github.com/user-attachments/assets/a85733d1-0b0e-4684-b701-f2f794d4de52" />
+Hint: <img width="766" height="561" alt="image" src="https://github.com/user-attachments/assets/f8defaf1-57a5-42b2-b994-f6f8b7c7464a" />
+
+6. <img width="756" height="568" alt="image" src="https://github.com/user-attachments/assets/c0b51b8b-bac9-458f-9bc7-f14c067bd0b9" />
+<img width="399" height="183" alt="image" src="https://github.com/user-attachments/assets/d5bc5907-f7a5-4630-996a-c4e28e69a5ea" />
+
+7. <img width="1173" height="150" alt="image" src="https://github.com/user-attachments/assets/c771ef50-a748-44ae-8c33-258a8da03b82" />
+
+8. <img width="776" height="617" alt="image" src="https://github.com/user-attachments/assets/5d26a0b9-5815-494c-b574-ed9e0d2c20a2" />
+Answer: <img width="451" height="260" alt="image" src="https://github.com/user-attachments/assets/271fc480-15bf-440d-9b36-19855985f3dc" />
+
+
+10. <img width="576" height="516" alt="image" src="https://github.com/user-attachments/assets/507dbe00-9923-465c-b05e-6809c2c5b04e" />
+<img width="652" height="149" alt="image" src="https://github.com/user-attachments/assets/0f586351-6fe3-4321-912b-ebfd6da85247" />
+
+
+11. 
+
+
+
+
+
+
+
+
+
 
