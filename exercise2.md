@@ -199,7 +199,7 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	Go to 0x08039828
 	</details>
 
-10. Now that we have identified the the location we are going to add code to, go back and add a ```bl``` instruction to the last line of our Redundant Error statement that we jump to. Right click on the line and select path instruction. Then type ```bl``` in the left box and ```0x08039828``` in the right box.  <br>
+10. Now that we have identified the location we are going to add the code to, go back and add a ```bl``` instruction to the last line of our Redundant Error statement that we jump to. Right click on the line and select patch instruction. Then type ```bl``` in the left box and ```0x08039828``` in the right box.  <br>
 <img width="576" height="516" alt="image" src="https://github.com/user-attachments/assets/507dbe00-9923-465c-b05e-6809c2c5b04e" />
 <img width="652" height="149" alt="image" src="https://github.com/user-attachments/assets/0f586351-6fe3-4321-912b-ebfd6da85247" />
 
