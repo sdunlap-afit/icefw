@@ -244,7 +244,7 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 21. Remember what bytes in the header are the CRC value? Navigate into the zip folder and right click on the file. Click on the properties menu and you should see the CRC value displayed on the bottom half.  <br>
     <img width="357" height="446" alt="image" src="https://github.com/user-attachments/assets/b4e31fb2-5c8d-4f5f-8e34-cc602ae73cbb" />
     
-22. Replace the CRC bytes in the header with what is displayed on your properties menu. Remember that the program operates in little endian! Save the file when you are done. Don't worry your CRC value may different then mine depending on where we wrote the instructions and saved the float value.  <br>
+22. Replace the CRC bytes in the header with what is displayed on your properties menu. Remember that the program operates in little endian! Save the file when you are done. Don't worry, your CRC value may different then mine depending on where we wrote the instructions and saved the float value.  <br>
  	<details closed>
 	<summary>Answer</summary>
 	<br>
@@ -252,7 +252,7 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	</details>
     
 
-23. Congrats! You have successfully implement your proof of concept rootkit! What other functions would we be able to develop using a more flushed out rootkit? Communicate from the device to other connected devices! Set their speed, replace firmware, override instructions., and more! Brodcats to bootloader commands:
+23. Congrats! You have successfully implement your proof of concept rootkit! What other functions would we be able to develop using a more flushed out rootkit? Communicate from the device to other connected devices! Set their speed, replace firmware, override instructions., and more! Brodcasts to bootloader commands:
 ```
 		undefined Send_UART_Cmd()  
 	    r0:4           input  
