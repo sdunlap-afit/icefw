@@ -43,10 +43,10 @@ Requirments: Install Ghidra if it isn't already on your machine, then install pr
 ### Now we want to add parts of the program that we don't have to the memory map.<br>
 
 1. Click on the <img width="22" height="24" alt="image" src="https://github.com/user-attachments/assets/e2b1af7a-2f42-45ae-adf6-26a7e81e52e2" /> symbol on the menu loacted at the top of the Ghidra program.
-    <img width="1226" height="426" alt="image" src="https://github.com/user-attachments/assets/3788ded0-d298-4358-a337-f7e2fba2dee5" />
-2. Select the Green add button located at the top right of the resulting menu.
-    <img width="1109" height="263" alt="image" src="https://github.com/user-attachments/assets/972d7072-ee1e-426f-b883-651b7bf561a9" />
-3. What are some parts of memory that could be useful? Where would we find references to these peices?
+    <img width="1226" height="426" alt="image" src="https://github.com/user-attachments/assets/3788ded0-d298-4358-a337-f7e2fba2dee5" />  
+2. Select the Green add button located at the top right of the resulting menu.  
+    <img width="1109" height="263" alt="image" src="https://github.com/user-attachments/assets/972d7072-ee1e-426f-b883-651b7bf561a9" />  
+3. What are some parts of memory that could be useful? Where would we find references to these peices?  
    <details closed>
    <summary>Answer</summary>
    <br>
@@ -142,7 +142,7 @@ C8  :Wheel  Reference  Speed  Ramp  Rate  Limit
 	<details closed>
 	<summary>Hints</summary>
 	<br>
-	USART2(Check the location we added to memory map), Bootloader Jump to Firmware(, **Command Code Resolution**, etc..
+	USART2(Check the location we added to memory map), Bootloader Jump to Firmware, **Command Code Resolution**, etc..
 	</details>
 
 4. What have you been able to find? Is there any room for a jump code insertion? What makes a good place for inserting our Jump code?
