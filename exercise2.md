@@ -77,11 +77,11 @@ We start this process by gathering as much information as we can from the vendor
    <summary>Answer</summary>
    Start of .bin:
    <br>
-   <img width="740" height="110" alt="image" src="fromHexClip.png" />
+   <img width="740" height="110" alt="image" src="/img/fromHexClip.PNG" />
    <br>
    Byte 73 of .cs:
    <br>
-   <img width="740" height="282" alt="image" src="csClip.png" />
+   <img width="740" height="282" alt="image" src="/img/csClip.PNG" />
    </details>
 <br>
 
@@ -103,7 +103,7 @@ We start this process by gathering as much information as we can from the vendor
     <summary>Answer</summary>
     The files are the same. Pressing RET to find next difference goes to the end of the file.
     <br>
-    <img width="959" height="990" alt="image" src="vbindiff.png" />
+    <img width="959" height="990" alt="image" src="/img/vbindiff.PNG" />
     <br>
     We have now proven that our .cs is a .bin file with a header. Next we'll analyze the header.
    </details>
@@ -221,7 +221,7 @@ Before we dive in to the header analysis, we should consider what information we
    What is our output?
    <details closed>
    <summary>Answer</summary>
-    <img width="735" height="85" alt="71AD7106" src="crc.png" />
+    <img width="735" height="85" alt="71AD7106" src="/img/crc.PNG" />
    </details>
 <br>
 
@@ -236,7 +236,7 @@ Before we dive in to the header analysis, we should consider what information we
    <summary>Open the Case</summary>
    We see the following:
    <br>
-   <img width="800" height="765" alt="image" src="RWInternal.png" />   
+   <img width="800" height="765" alt="image" src="/img/RWInternal.png" />   
    </details>
    <details closed>
    <summary>What kind of processor do we have?</summary>
@@ -248,11 +248,11 @@ Before we dive in to the header analysis, we should consider what information we
 
    Looking it up we learn that it is an ARM processor with 512kB of flash memory.
 
-   <img width="537" height="347" alt="image" src="STMlookup.png" />
+   <img width="537" height="347" alt="image" src="/img/STMlookup.png" />
 
    Our data sheet also conveniently contains a memory map for the processor:
 
-   <img width="830" height="380" alt="image" src="STMmemory.png" />
+   <img width="830" height="380" alt="image" src="/img/STMmemory.png" />
    </details>
    <details closed>
    <summary>Given everything we just learned, what is that data field?</summary>
@@ -316,21 +316,21 @@ Before we dive in to the header analysis, we should consider what information we
     Note: Online converters make this easy. <br>
     First, we convert our data (66C884D2) into a decimal value: 1724417234
     <br>
-    <img width="870" height="450" alt="image" src="buildtime.png" />
+    <img width="870" height="450" alt="image" src="/img/buildtime.PNG" />
     <br>
     Then we plug this value into an epoch converter:
-    <img width="800" height="290" alt="image" src="date.png" />
+    <img width="800" height="290" alt="image" src="/img/date.PNG" />
     </details>
 
 ## .CS Header Summary
-We have finished analyzing our header and have identified several key fields that we will use later. For convenience, here a summary image showing the fields we identified.
+We have finished analyzing our header and have identified several key fields that we will use later. For convenience, here is a summary image showing the fields we identified.
 <details>
    <summary>Header Fields</summary>
-   <img width="904" height="532" alt="image" src="headerMap.png" />
+   <img width="904" height="532" alt="image" src="/img/headerMap.png" />
    </details>
 
 ## Bootloader Header Analysis
-Now it's your turn! Answer the following questions using the bootloader and control program files:
+Now it's your turn! Answer the following questions using everything we've discussed previously along with the bootloader files:
 
 1. How big is the bootloader header?
    <details>
